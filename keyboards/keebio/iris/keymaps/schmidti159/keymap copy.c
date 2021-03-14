@@ -2,11 +2,12 @@
 #include "keymap_german.h"
 
 #define _NEO 0
-#define _QUER 1
+#define _NEO2 1
 #define _SYMB 2
 #define _FUN1 3
 #define _FUN2 4
 #define _MAST 5
+#define _QUER 6
 
 // german keycodes redefined
 #define DE_AE DE_ADIA
@@ -34,49 +35,72 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
+  /*[_NEO] = LAYOUT(
+  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
+     KC_HYPR, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     KC_MEH,  KC_X,    KC_V,    KC_L,    KC_C,    KC_W,                               KC_K,    KC_H,    KC_G,    KC_F,    KC_Q,    DE_SS,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     LT(_FUN1,KC_PSCR),
+              KC_U,    KC_I,    KC_A,    KC_E,    KC_O,                               KC_S,    KC_N,    KC_R,    KC_T,    KC_D,    CTL_T(KC_Y),
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     CTL_T(KC_ESC),
+              DE_UE,   DE_OE,   DE_AE,   KC_P,    KC_Z,    MO(_MAST),        KC_DEL,  KC_B,    KC_M,    DE_COMM, DE_DOT,  KC_J,    MO(_SYMB),
+  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
+                                    KC_LGUI, LT(_SYMB,KC_TAB),
+                                                      LT(_NEO2,KC_SPC),          LT(_NEO2,KC_BSPC),
+                                                                                          LT(_FUN1,KC_ENT),
+                                                                                                   KC_RALT
+                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
+  ),*/
   [_NEO] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_HYPR, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_MEH,  KC_X,    KC_V,    KC_L,    KC_C,    KC_W,                               KC_K,    KC_H,    KC_G,    KC_F,    KC_Q,    DE_SS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_PSCR,
+     LT(_FUN1,KC_PSCR),
             LGUI_T(KC_U),LALT_T(KC_I),
                               LCTL_T(KC_A),LSFT_T(KC_E),KC_O,                         KC_S,  RSFT_T(KC_N),RCTL_T(KC_R),
                                                                                                                LALT_T(KC_T),RGUI_T(KC_D),DE_Y,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     LT(_MAST,KC_ESC),
-              DE_UE,   DE_OE,   DE_AE,   KC_P,    DE_Z,    MO(_FUN2),       MO(_MAST),KC_B,    KC_M,    DE_COMM, DE_DOT,  KC_J,    MO(_FUN2),
+     CTL_T(KC_ESC),
+              DE_UE,   DE_OE,   DE_AE,   KC_P,    DE_Z,    MO(_FUN2),        MO(_MAST),  KC_B,    KC_M,    DE_COMM, DE_DOT,  KC_J,    MO(_SYMB),
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    MO(_SYMB), LT(_FUN1,KC_TAB),
-                                                      LSFT_T(KC_SPC),      RSFT_T(KC_BSPC),
+                                    KC_LGUI, LT(_SYMB,KC_TAB),
+                                                      KC_SPC,                    KC_BSPC,
                                                                                           LT(_FUN1,KC_ENT),
-                                                                                                   MO(_SYMB)
+                                                                                                   KC_RALT
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
-// QUERTZ
-  [_QUER] = LAYOUT(
+
+
+// "shift" layer
+  [_NEO2] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     LOCK,    DE_1,    DE_2,    DE_3,    DE_4,    DE_5,                               DE_6,    DE_7,    DE_8,    DE_9,    DE_0,    DE_SS,
+     LOCK,    UC(UC_L_AR),UC(UC_LR_AR),UC(UC_R_AR),
+                                         UC(UC_CHK_MRK),UC(UC_X_MRK),                 _______, DE_EURO, DE_DEG,  UC(UC_DE_LQQ),UC(UC_DE_RQQ),UC(UC_EN_RQQ),
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_ESC,  DE_Q,    DE_W,    DE_E,    DE_R,    DE_T,                               DE_Z,    DE_U,    DE_I,    DE_O,    DE_P,    DE_UDIA,
+     _______, S(KC_X), S(KC_V), S(KC_L), S(KC_C), S(KC_W),                            S(KC_K), S(KC_H), S(KC_G), S(KC_F), S(KC_Q), KC_F12,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT, DE_A,    DE_S,    DE_D,    DE_F,    DE_G,                               DE_H,    DE_J,    DE_K,    DE_L,    DE_ODIA, DE_ADIA,
+     _______, S(KC_U), S(KC_I), S(KC_A), S(KC_E), S(KC_O),                            S(KC_S), S(KC_N), S(KC_R), S(KC_T), S(KC_D), S(CTL_T(KC_Y)),
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LCTL, DE_Y,    DE_X,    DE_C,    DE_V,    DE_B,    MO(_MAST),        _______, DE_N,    DE_M,    DE_COMM, DE_DOT,  DE_MINS, _______,
+     S(CTL_T(KC_ESC)),
+              S(DE_UE),S(DE_OE),S(DE_AE),S(KC_P), S(KC_Z), _______,          _______, S(KC_B), S(KC_M), _______, _______, S(KC_S), _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_LGUI, _______, KC_SPC,                    KC_BSPC, KC_ENT,  KC_LALT
+                                    _______, _______, _______,                   _______,  _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
+
 // Symbols
   [_SYMB] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      LOCK,    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, UC(UC_3DOTS),
-                       DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC,                            DE_EXLM, DE_LABK, DE_RABK, DE_EQL,  DE_AMPR, KC_F12,
+                       DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC,                            DE_EXLM, DE_LABK, DE_RABK, DE_EQL,  DE_AMPR, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, DE_BSLS, DE_SLSH, DE_LCBR, DE_RCBR, DE_ASTR,                            DE_QUES, DE_LPRN, DE_RPRN, DE_MINS, DE_COLN, DE_AT,
+     _______, DE_BSLS, DE_SLSH, DE_LCBR, DE_RCBR, DE_ASTR,                            DE_QUES, DE_LPRN, DE_RPRN, DE_MINS, DE_COLN, CTL_T(DE_AT),
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, DE_HASH, DE_DLR,  DE_PIPE, DE_TILD, DE_GRV,  _______,          _______, DE_PLUS, DE_PERC, DE_DQUO, DE_QUOT, DE_SCLN, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -113,6 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
+
 // Master: Switch Layouts, Media, RGB, QMK, ...
   [_MAST] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
@@ -126,9 +151,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
+  ),
+
+// QUERTZ
+  [_QUER] = LAYOUT(
+  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
+     LOCK,    DE_1,    DE_2,    DE_3,    DE_4,    DE_5,                               DE_6,    DE_7,    DE_8,    DE_9,    DE_0,    DE_SS,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     KC_ESC,  DE_Q,    DE_W,    DE_E,    DE_R,    DE_T,                               DE_Z,    DE_U,    DE_I,    DE_O,    DE_P,    DE_UDIA,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     KC_LSFT, DE_A,    DE_S,    DE_D,    DE_F,    DE_G,                               DE_H,    DE_J,    DE_K,    DE_L,    DE_ODIA, DE_ADIA,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     KC_LCTL, DE_Y,    DE_X,    DE_C,    DE_V,    DE_B,    MO(_MAST),        _______, DE_N,    DE_M,    DE_COMM, DE_DOT,  DE_MINS, _______,
+  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
+                                    KC_LGUI, _______, KC_SPC,                    KC_BSPC, KC_ENT,  KC_LALT
+                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   )
 };
-
+void eeconfig_init_user(void) {
+  set_unicode_input_mode(UC_WIN);
+}
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   /*switch (keycode) {
     case QWERTY:
@@ -169,12 +211,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-// #### ENCODER SETUP ####
-bool is_alt_tab_active = false;
-uint16_t alt_tab_timer = 0;
+bool is_alt_tab_active = false; // ADD this near the begining of keymap.c
+uint16_t alt_tab_timer = 0;     // we will be using them soon.
 
-bool is_ctrl_tab_active = false;
-uint16_t ctrl_tab_timer = 0;
 
 void encoder_update_user(uint8_t index, bool clockwise) {
     if (IS_LAYER_ON(_NEO)) {
@@ -184,38 +223,63 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                 register_code(KC_LALT);
             }
             alt_tab_timer = timer_read();
-
-            clockwise ? tap_code(KC_TAB) : tap_code16(S(KC_TAB));
+            if (clockwise) {
+                tap_code(KC_TAB);
+            } else {
+                tap_code16(S(KC_TAB));
+            }
         } else if (index == 1) {
-            clockwise ? tap_code(KC_WH_D) : tap_code(KC_WH_U);
+            if (clockwise) {
+                tap_code(KC_WH_D);
+            } else {
+                tap_code(KC_WH_U);
+            }
         }
     } else if (IS_LAYER_ON(_SYMB)) {
         if (index == 0) {
-            if (!is_ctrl_tab_active) {
-                is_ctrl_tab_active = true;
-                register_code(KC_LCTRL);
+            if (clockwise) {
+                tap_code16(C(KC_TAB));
+            } else {
+                tap_code16(C(S(KC_TAB)));
             }
-            ctrl_tab_timer = timer_read();
-
-            clockwise ? tap_code(KC_TAB) : tap_code16(S(KC_TAB));
         } else if (index == 1) {
-            clockwise ? tap_code(KC_WH_R) : tap_code(KC_WH_L);
+            if (clockwise) {
+                tap_code(KC_WH_R);
+            } else {
+                tap_code(KC_WH_L);
+            }
         }
     } else if (IS_LAYER_ON(_FUN1)) {
         if (index == 0) {
-            clockwise ? tap_code(KC_RIGHT) : tap_code(KC_LEFT);
+            if (clockwise) {
+                tap_code(KC_RIGHT);
+            } else {
+                tap_code(KC_LEFT);
+            }
         } else if (index == 1) {
-            clockwise ? tap_code(KC_DOWN) : tap_code(KC_UP);
+            if (clockwise) {
+                tap_code(KC_DOWN);
+            } else {
+                tap_code(KC_UP);
+            }
         }
     } else if (IS_LAYER_ON(_FUN2)) {
         if (index == 0) {
             // nothing (is used as layer activation switch)
         } else if (index == 1) {
-            clockwise ? tap_code16(C(DE_Y)) : tap_code16(C(DE_Z));
+            if (clockwise) {
+                tap_code16(C(DE_Y));
+            } else {
+                tap_code16(C(DE_Z));
+            }
         }
     } else if (IS_LAYER_ON(_MAST)) {
         if (index == 0) {
-            clockwise ? tap_code(KC_VOLU) : tap_code(KC_VOLD);
+            if (clockwise) {
+                tap_code(KC_VOLU);
+            } else {
+                tap_code(KC_VOLD);
+            }
         } else if (index == 1) {
             // nothing (is used as layer activation switch)
         }
@@ -224,44 +288,9 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 
 void matrix_scan_user(void) { // The very important timer.
   if (is_alt_tab_active) {
-    if (timer_elapsed(alt_tab_timer) > 700) {
+    if (timer_elapsed(alt_tab_timer) > 500) {
       unregister_code(KC_LALT);
       is_alt_tab_active = false;
     }
   }
-  if(is_ctrl_tab_active) {
-    if (timer_elapsed(ctrl_tab_timer) > 700) {
-      unregister_code(KC_LCTRL);
-      is_ctrl_tab_active = false;
-    }
-  }
-}
-
-// #### RGB LAYERS ####
-void keyboard_post_init_user(void) {
-    rgblight_disable();
-}
-layer_state_t layer_state_set_user(layer_state_t state) {
-    rgblight_enable();
-    switch (get_highest_layer(state)) {
-    case _QUER:
-        rgblight_setrgb (RGB_BLUE);
-        break;
-    case _SYMB:
-        rgblight_setrgb (RGB_CYAN);
-        break;
-    case _FUN1:
-        rgblight_setrgb (RGB_YELLOW);
-        break;
-    case _FUN2:
-        rgblight_setrgb (RGB_ORANGE);
-        break;
-    case _MAST:
-        rgblight_setrgb (RGB_RED);
-        break;
-    default: //  for any other layers, or the default layer
-        rgblight_disable();
-        break;
-    }
-  return state;
 }

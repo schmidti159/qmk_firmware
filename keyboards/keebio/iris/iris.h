@@ -13,7 +13,7 @@
 #endif
 
 #include "quantum.h"
-#include "via.h"
+//#include "via.h"
 
 // Used to create a keymap using only KC_ prefixed keys
 #define LAYOUT_kc( \
