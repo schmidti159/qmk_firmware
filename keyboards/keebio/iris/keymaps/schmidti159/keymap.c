@@ -31,27 +31,33 @@ enum custom_keycodes {
 #define UC_DE_RQ 0x2018 // ‘
 #define UC_EN_RQ 0x2019 // ’
 #define UC_3DOTS 0x2026 // …
+#define UC_NBSP 0x00a0 // non breaking speed
+
+#define GL(KC) LGUI_T(KC)
+#define AL(KC) LALT_T(KC)
+#define CL(KC) LCTL_T(KC)
+#define SL(KC) LSFT_T(KC)
+
+#define SR(KC) RSFT_T(KC)
+#define CR(KC) RCTL_T(KC)
+#define AR(KC) LALT_T(KC)
+#define GR(KC) RGUI_T(KC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NEO] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     KC_HYPR, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
+     KC_HYPR, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_PSCR,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_MEH,  KC_X,    KC_V,    KC_L,    KC_C,    KC_W,                               KC_K,    KC_H,    KC_G,    KC_F,    KC_Q,    DE_SS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_PSCR,
-            LGUI_T(KC_U),LALT_T(KC_I),
-                              LCTL_T(KC_A),LSFT_T(KC_E),KC_O,                         KC_S,  RSFT_T(KC_N),RCTL_T(KC_R),
-                                                                                                               LALT_T(KC_T),RGUI_T(KC_D),DE_Y,
+     KC_ESC,  GL(KC_U),AL(KC_I),CL(KC_A),SL(KC_E),KC_O,                               KC_S,    SR(KC_N),CR(KC_R),AR(KC_T),GR(KC_D),DE_Y,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     LT(_MAST,KC_ESC),
-              DE_UE,   DE_OE,   DE_AE,   KC_P,    DE_Z,    MO(_FUN2),       MO(_MAST),KC_B,    KC_M,    DE_COMM, DE_DOT,  KC_J,    MO(_FUN2),
+     MO(_MAST),DE_UE,  DE_OE,   DE_AE,   KC_P,    DE_Z,    MO(_FUN2),       MO(_MAST),KC_B,    KC_M,    DE_COMM, DE_DOT,  KC_J,    MO(_FUN2),
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    MO(_SYMB), LT(_FUN1,KC_TAB),
-                                                      LSFT_T(KC_SPC),      RSFT_T(KC_BSPC),
-                                                                                          LT(_FUN1,KC_ENT),
-                                                                                                   MO(_SYMB)
+                                    MO(_SYMB),LT(_FUN1,KC_TAB),
+                                                      SL(KC_SPC),              SR(KC_BSPC),
+                                                                                       LT(_FUN1,KC_ENT),MO(_SYMB)
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 // QUERTZ
@@ -76,11 +82,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      _______, UC(UC_3DOTS),
                        DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC,                            DE_EXLM, DE_LABK, DE_RABK, DE_EQL,  DE_AMPR, KC_F12,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, DE_BSLS, DE_SLSH, DE_LCBR, DE_RCBR, DE_ASTR,                            DE_QUES, DE_LPRN, DE_RPRN, DE_MINS, DE_COLN, DE_AT,
+    UC(UC_NBSP),DE_BSLS,DE_SLSH,DE_LCBR, DE_RCBR, DE_ASTR,                            DE_QUES, DE_LPRN, DE_RPRN, DE_MINS, DE_COLN, DE_AT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, DE_HASH, DE_DLR,  DE_PIPE, DE_TILD, DE_GRV,  _______,          _______, DE_PLUS, DE_PERC, DE_DQUO, DE_QUOT, DE_SCLN, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, _______,                   _______, _______, _______
+                                    _______, _______, _______,               _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -89,13 +95,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      LOCK,    _______, _______, _______, _______, _______,                            _______, DE_COLN, KC_PSLS, KC_PAST, KC_PMNS, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_PGUP, KC_BSPC, KC_UP,   KC_DEL,  KC_HOME,                            _______, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, _______,
+     KC_APP,  KC_PGUP, KC_BSPC, KC_UP,   KC_DEL,  KC_HOME,                            _______, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,                             _______, KC_P4,   KC_P5,   KC_P6,   DE_DOT,  KC_RCTL,
+     KC_INS,  KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,                             _______, KC_P4,   KC_P5,   KC_P6,   DE_DOT,  _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_TAB,  _______, _______, KC_ENT,  _______, _______,          _______, _______, KC_P1,   KC_P2,   KC_P3,   DE_COMM, _______,
+     LT(_MAST,KC_ALGR),
+              KC_TAB,  KC_WBAK, KC_WFWD, KC_ENT,  _______, _______,          _______, _______, KC_P1,   KC_P2,   KC_P3,   DE_COMM, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, _______,                   _______, _______, ALT_T(KC_P0)
+                                    _______, _______, _______,                   _______, _______, KC_P0
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -106,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,                             _______, _______, _______, _______, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_F11,  KC_F12,  KC_F13,  KC_F14,  KC_F15,                             _______, _______, _______, _______, _______, _______,
+     _______, KC_F11,  KC_F12,  KC_F13,  KC_F14,  KC_F15,                             _______, KC_RSFT, KC_RCTL, KC_LALT, KC_LGUI, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,  _______,          _______, _______, _______, _______, _______, _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -116,13 +123,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Master: Switch Layouts, Media, RGB, QMK, ...
   [_MAST] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     LOCK,    _______, _______, _______, _______, _______,                            TO(_NEO),TO(_QUER),_______,_______,_______, RESET,
+     TO(_NEO),TO(_QUER),_______,_______, _______, RESET,                              KC_ACL0, KC_ACL1, KC_ACL2, _______, _______, RESET,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+     KC_CALC, _______, KC_MRWD, _______, KC_MFFD, _______,                            _______, KC_BTN1, KC_MS_U, KC_BTN2, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+     BL_STEP, _______, KC_MPRV, KC_MPLY, KC_MNXT, _______,                            _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
+     _______, KC_SLEP, _______, _______, _______, _______, KC_MUTE,          _______, _______, KC_BTN4, KC_BTN3, KC_BTN5, _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -209,12 +216,13 @@ void encoder_update_user(uint8_t index, bool clockwise) {
         }
     } else if (IS_LAYER_ON(_FUN2)) {
         if (index == 0) {
-            // nothing (is used as layer activation switch)
+            clockwise ? tap_code16(KC_WFWD) : tap_code16(KC_WBAK);
         } else if (index == 1) {
             clockwise ? tap_code16(C(DE_Y)) : tap_code16(C(DE_Z));
         }
     } else if (IS_LAYER_ON(_MAST)) {
         if (index == 0) {
+            clockwise ? tap_code(KC_VOLU) : tap_code(KC_VOLD);
             clockwise ? tap_code(KC_VOLU) : tap_code(KC_VOLD);
         } else if (index == 1) {
             // nothing (is used as layer activation switch)
@@ -239,25 +247,26 @@ void matrix_scan_user(void) { // The very important timer.
 
 // #### RGB LAYERS ####
 void keyboard_post_init_user(void) {
+    rgblight_setrgb(RGB_WHITE);
     rgblight_disable();
 }
 layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_enable();
     switch (get_highest_layer(state)) {
     case _QUER:
-        rgblight_setrgb (RGB_BLUE);
+        rgblight_setrgb(RGB_BLUE);
         break;
     case _SYMB:
-        rgblight_setrgb (RGB_CYAN);
+        rgblight_setrgb(RGB_CYAN);
         break;
     case _FUN1:
-        rgblight_setrgb (RGB_YELLOW);
+        rgblight_setrgb(RGB_YELLOW);
         break;
     case _FUN2:
-        rgblight_setrgb (RGB_ORANGE);
+        rgblight_setrgb(RGB_ORANGE);
         break;
     case _MAST:
-        rgblight_setrgb (RGB_RED);
+        rgblight_setrgb(RGB_RED);
         break;
     default: //  for any other layers, or the default layer
         rgblight_disable();
