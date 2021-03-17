@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT, DE_A,    DE_S,    DE_D,    DE_F,    DE_G,                               DE_H,    DE_J,    DE_K,    DE_L,    DE_ODIA, DE_ADIA,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LCTL, DE_Y,    DE_X,    DE_C,    DE_V,    DE_B,    MO(_MAST),        _______, DE_N,    DE_M,    DE_COMM, DE_DOT,  DE_MINS, _______,
+     KC_LCTL, DE_Y,    DE_X,    DE_C,    DE_V,    DE_B,    MO(_MAST),        MO(_MAST), DE_N,    DE_M,    DE_COMM, DE_DOT,  DE_MINS, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     KC_LGUI, _______, KC_SPC,                    KC_BSPC, KC_ENT,  KC_LALT
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -109,15 +109,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Function 2: F-Keys, ...
   [_FUN2] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     LOCK,    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F21,  KC_F22,  KC_F23,  KC_F24,  _______, _______,
+     C(KC_F1),C(KC_F2),C(KC_F3),C(KC_F4),C(KC_F5),C(KC_F6),                          C(KC_F13),C(KC_F14),C(KC_F15),C(KC_F16),C(KC_F17),C(KC_F18),
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,                             _______, _______, _______, _______, _______, _______,
+     C(KC_F7),C(KC_F8),C(KC_F9),C(KC_F10),C(KC_F11),C(KC_F12),                       C(KC_F19),C(KC_F20),C(KC_F21),C(KC_F22),C(KC_F23),C(KC_F24),
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_F11,  KC_F12,  KC_F13,  KC_F14,  KC_F15,                             _______, KC_RSFT, KC_RCTL, KC_LALT, KC_LGUI, _______,
+     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                              KC_F13,  KC_F14,  KC_F15,  KC_F16,  KC_F17,  KC_F18,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,  _______,          _______, _______, _______, _______, _______, _______, _______,
+     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,          _______, KC_F19,  KC_F20,  KC_F21,  KC_F22,  KC_F23,  _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, _______,                   _______, _______, _______
+                                    KC_LGUI, KC_LALT, KC_LSFT,                   KC_RSFT, KC_LALT, KC_RGUI
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 // Master: Switch Layouts, Media, RGB, QMK, ...
@@ -125,11 +125,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      TO(_NEO),TO(_QUER),_______,_______, _______, RESET,                              KC_ACL0, KC_ACL1, KC_ACL2, _______, _______, RESET,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_CALC, _______, KC_MRWD, _______, KC_MFFD, _______,                            _______, KC_BTN1, KC_MS_U, KC_BTN2, _______, _______,
+     KC_CALC, _______, _______, _______, _______, _______,                            _______, KC_BTN1, KC_MS_U, KC_BTN2, _______, DM_RSTP,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     BL_STEP, _______, KC_MPRV, KC_MPLY, KC_MNXT, _______,                            _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______,
+     BL_STEP, _______, KC_MPRV, KC_MPLY, KC_MNXT, _______,                            _______, KC_MS_L, KC_MS_D, KC_MS_R, DM_PLY1, DM_REC1,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_SLEP, _______, _______, _______, _______, KC_MUTE,          _______, _______, KC_BTN4, KC_BTN3, KC_BTN5, _______, _______,
+     _______, KC_SLEP, _______, _______, _______, _______, KC_MUTE,          _______, _______, KC_BTN4, KC_BTN3, KC_BTN5, DM_PLY2, DM_REC2,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -184,17 +184,25 @@ bool is_ctrl_tab_active = false;
 uint16_t ctrl_tab_timer = 0;
 
 void encoder_update_user(uint8_t index, bool clockwise) {
-    if (IS_LAYER_ON(_NEO)) {
+    if (IS_LAYER_ON(_MAST)) {
         if (index == 0) {
-            if (!is_alt_tab_active) {
-                is_alt_tab_active = true;
-                register_code(KC_LALT);
+            for(int i=0; i<2; i++) {
+                clockwise ? tap_code(KC_VOLU) : tap_code(KC_VOLD);
             }
-            alt_tab_timer = timer_read();
-
-            clockwise ? tap_code(KC_TAB) : tap_code16(S(KC_TAB));
         } else if (index == 1) {
-            clockwise ? tap_code(KC_WH_D) : tap_code(KC_WH_U);
+            clockwise ? tap_code(KC_WH_R) : tap_code(KC_WH_L);
+        }
+    } else if (IS_LAYER_ON(_FUN2)) {
+        if (index == 0) {
+            clockwise ? tap_code16(KC_WFWD) : tap_code16(KC_WBAK);
+        } else if (index == 1) {
+            clockwise ? tap_code16(C(DE_Y)) : tap_code16(C(DE_Z));
+        }
+    } else if (IS_LAYER_ON(_FUN1)) {
+        if (index == 0) {
+            clockwise ? tap_code(KC_RIGHT) : tap_code(KC_LEFT);
+        } else if (index == 1) {
+            clockwise ? tap_code(KC_DOWN) : tap_code(KC_UP);
         }
     } else if (IS_LAYER_ON(_SYMB)) {
         if (index == 0) {
@@ -206,26 +214,22 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 
             clockwise ? tap_code(KC_TAB) : tap_code16(S(KC_TAB));
         } else if (index == 1) {
-            clockwise ? tap_code(KC_WH_R) : tap_code(KC_WH_L);
+            // scroll fast
+            for(int i=0; i<7; i++) {
+                clockwise ? tap_code(KC_WH_D) : tap_code(KC_WH_U);
+            }
         }
-    } else if (IS_LAYER_ON(_FUN1)) {
+    } else if (IS_LAYER_ON(_NEO)) {
         if (index == 0) {
-            clockwise ? tap_code(KC_RIGHT) : tap_code(KC_LEFT);
+            if (!is_alt_tab_active) {
+                is_alt_tab_active = true;
+                register_code(KC_LALT);
+            }
+            alt_tab_timer = timer_read();
+
+            clockwise ? tap_code(KC_TAB) : tap_code16(S(KC_TAB));
         } else if (index == 1) {
-            clockwise ? tap_code(KC_DOWN) : tap_code(KC_UP);
-        }
-    } else if (IS_LAYER_ON(_FUN2)) {
-        if (index == 0) {
-            clockwise ? tap_code16(KC_WFWD) : tap_code16(KC_WBAK);
-        } else if (index == 1) {
-            clockwise ? tap_code16(C(DE_Y)) : tap_code16(C(DE_Z));
-        }
-    } else if (IS_LAYER_ON(_MAST)) {
-        if (index == 0) {
-            clockwise ? tap_code(KC_VOLU) : tap_code(KC_VOLD);
-            clockwise ? tap_code(KC_VOLU) : tap_code(KC_VOLD);
-        } else if (index == 1) {
-            // nothing (is used as layer activation switch)
+            clockwise ? tap_code(KC_WH_D) : tap_code(KC_WH_U);
         }
     }
 }
