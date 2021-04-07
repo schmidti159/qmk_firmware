@@ -1,5 +1,5 @@
 /*
-Copyright 2017 Danny Nguyen <danny@keeb.io>
+Copyright 2021 Daniel Schmidt <daniel@ad-schmidt.de>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // Configure the global tapping term (default: 200ms)
 #define TAPPING_TERM 150
+#define TAPPING_TERM_PER_KEY
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
 #define IGNORE_MOD_TAP_INTERRUPT
@@ -32,9 +33,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Apply the modifier on keys that are tapped during a short hold of a modtap
 //#define PERMISSIVE_HOLD
 
+#define FORCE_NKRO
+
 #define UNICODE_SELECTED_MODES UC_WINC
 
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
 #define DISABLE_LEADER
-#define RGBLIGHT_SPLIT

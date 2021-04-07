@@ -1,22 +1,36 @@
+/*
+Copyright 2021 Daniel Schmidt <daniel@ad-schmidt.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include QMK_KEYBOARD_H
 #include "keymap_german.h"
 
-#define _NEO 0
-#define _QUER 1
-#define _SYMB 2
-#define _FUN1 3
-#define _FUN2 4
-#define _MAST 5
+enum my_layers {
+    _NEO,
+    _QUER,
+    _SYMB,
+    _FUN1,
+    _FUN2,
+    _MAST
+};
 
 // german keycodes redefined
 #define DE_AE DE_ADIA
 #define DE_OE DE_ODIA
 #define DE_UE DE_UDIA
-
-enum custom_keycodes {
-  LOCK = SAFE_RANGE,
-  NEXT
-};
 
 // unicode code points
 #define UC_L_AR 0x2190 // ←
@@ -33,6 +47,7 @@ enum custom_keycodes {
 #define UC_3DOTS 0x2026 // …
 #define UC_NBSP 0x00a0 // non breaking speed
 
+// shorthands for home row mods
 #define GL(KC) LGUI_T(KC)
 #define AL(KC) LALT_T(KC)
 #define CL(KC) LCTL_T(KC)
@@ -63,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // QUERTZ
   [_QUER] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     LOCK,    DE_1,    DE_2,    DE_3,    DE_4,    DE_5,                               DE_6,    DE_7,    DE_8,    DE_9,    DE_0,    DE_SS,
+     _______, DE_1,    DE_2,    DE_3,    DE_4,    DE_5,                               DE_6,    DE_7,    DE_8,    DE_9,    DE_0,    DE_SS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_ESC,  DE_Q,    DE_W,    DE_E,    DE_R,    DE_T,                               DE_Z,    DE_U,    DE_I,    DE_O,    DE_P,    DE_UDIA,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -77,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Symbols
   [_SYMB] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     LOCK,    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
+     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, UC(UC_3DOTS),
                        DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC,                            DE_EXLM, DE_LABK, DE_RABK, DE_EQL,  DE_AMPR, KC_F12,
@@ -93,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Function 1: arrow keys, numpad
   [_FUN1] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     LOCK,    _______, _______, _______, _______, _______,                            _______, DE_COLN, KC_PSLS, KC_PAST, KC_PMNS, _______,
+     _______, _______, _______, _______, _______, _______,                            _______, DE_COLN, KC_PSLS, KC_PAST, KC_PMNS, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_APP,  KC_PGUP, KC_BSPC, KC_UP,   KC_DEL,  KC_HOME,                            KC_SPC,  KC_P7,   KC_P8,   KC_P9,   KC_PPLS, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -136,47 +151,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  /*switch (keycode) {
-    case QWERTY:
-      if (record->event.pressed) {
-        set_single_persistent_default_layer(_QWERTY);
-      }
-      return false;
-      break;
-    case LOWER:
-      if (record->event.pressed) {
-        layer_on(_LOWER);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      } else {
-        layer_off(_LOWER);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
-    case RAISE:
-      if (record->event.pressed) {
-        layer_on(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      } else {
-        layer_off(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
-    case ADJUST:
-      if (record->event.pressed) {
-        layer_on(_ADJUST);
-      } else {
-        layer_off(_ADJUST);
-      }
-      return false;
-      break;
-  }*/
-  return true;
+// custom reduced tapping term for shift keys (index finger)
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case SL(KC_E):
+        case SR(KC_N):
+            return TAPPING_TERM - 10;
+        default:
+            return TAPPING_TERM;
+    }
 }
 
 // #### ENCODER SETUP ####
+#define ALT_TAB_TIMEOUT 700
+
 bool is_alt_tab_active = false;
 uint16_t alt_tab_timer = 0;
 
@@ -234,15 +223,15 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     }
 }
 
-void matrix_scan_user(void) { // The very important timer.
+void matrix_scan_user(void) { // The timer for alt/ctrl+tab with encoder
   if (is_alt_tab_active) {
-    if (timer_elapsed(alt_tab_timer) > 700) {
+    if (timer_elapsed(alt_tab_timer) > ALT_TAB_TIMEOUT) {
       unregister_code(KC_LALT);
       is_alt_tab_active = false;
     }
   }
   if(is_ctrl_tab_active) {
-    if (timer_elapsed(ctrl_tab_timer) > 700) {
+    if (timer_elapsed(ctrl_tab_timer) > ALT_TAB_TIMEOUT) {
       unregister_code(KC_LCTRL);
       is_ctrl_tab_active = false;
     }
