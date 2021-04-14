@@ -151,6 +151,77 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
+// custom symbols on shift layer above numbers
+bool shifted_keycode_pressed = false;
+
+uint16_t get_shifted_keycode(uint16_t keycode) {
+    switch(keycode) {
+        case KC_6:
+            return DE_EURO;
+        case KC_7:
+            return DE_DEG;
+        default:
+            return 0;
+    }
+}
+uint16_t get_shifted_unicode_codepoint(uint16_t keycode) {
+    switch(keycode) {
+        case KC_1:
+            return UC_L_AR;
+        case KC_2:
+            return UC_LR_AR;
+        case KC_3:
+            return UC_R_AR;
+        case KC_4:
+            return UC_CHK_MRK;
+        case KC_5:
+            return UC_X_MRK;
+        case KC_8:
+            return UC_DE_LQQ;
+        case KC_9:
+            return UC_DE_RQQ;
+        case KC_0:
+            return UC_EN_RQQ;
+        default:
+            return 0;
+    }
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    uint16_t shifted_keycode = get_shifted_keycode(keycode);
+    uint16_t shifted_unicode_codepoint = get_shifted_unicode_codepoint(keycode);
+    if(shifted_keycode || shifted_unicode_codepoint) {
+        // there is a special shift keycode for this keycode
+        if (record->event.pressed) {
+            uint8_t mod_state = get_mods();
+            if(mod_state & MOD_MASK_SHIFT) {
+                // register the special shifted keycode (but without shift)
+                del_mods(MOD_MASK_SHIFT);
+                if(shifted_keycode) {
+                    register_code16(shifted_keycode);
+                } else if(shifted_unicode_codepoint) {
+                    register_unicode(shifted_unicode_codepoint);
+                }
+                shifted_keycode_pressed = true;
+                set_mods(mod_state);
+                return false;
+            }
+        } else {
+            if(shifted_keycode_pressed) {
+                // instead of the normal keycode the special shifted keycode was registered -> unregister it now
+                if(shifted_keycode) {
+                    unregister_code16(shifted_keycode);
+                } else if(shifted_unicode_codepoint) {
+                    // nothing to do on unregister for unicode
+                }
+                shifted_keycode_pressed = false;
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 // custom reduced tapping term for shift keys (index finger)
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
